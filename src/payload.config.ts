@@ -10,6 +10,9 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Documents } from './collections/Documents'
 import { s3Storage } from '@payloadcms/storage-s3'
+import { Pages } from './collections/Pages'
+import { Menu } from './globals/Menu'
+import LandingPageMenu from './globals/LandingPageMenu'
 
 
 const filename = fileURLToPath(import.meta.url)
@@ -19,7 +22,19 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users, Documents, Media],
+  collections: [Users, Documents, Media, Pages,],
+  globals: [
+    Menu, LandingPageMenu
+  ],
+  cors: [
+     'http://localhost:4321',
+     'http://localhost:4321/etusivu',
+     'http://localhost:4321/*',
+     'http://localhost:5173',
+     'http://localhost:5173/*',
+     'http://localhost:5173/etusivu',
+
+   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
